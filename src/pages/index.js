@@ -1,18 +1,16 @@
 import React from 'react';
 
-import MainGrid from '../components/MainGrid';
-import Box from '../components/Box';
 import Menu from '../components/Menu';
+import MainGrid from '../components/MainGrid';
 import ProfileSidebar from '../components/ProfileSidebar';
+import ProfileInfos from '../components/ProfileInfos';
+
 import Followers from '../components/Followers';
 import Following from '../components/Following';
 import Communities from '../components/Communities';
 
-import { OrkutNostalgicIconSet } from '../lib/AluraKutCommons';
-
 export default function Home() {
   const githubUser = 'jefferson1104';
-
 
   return (
     <>
@@ -23,14 +21,7 @@ export default function Home() {
         </div>
       
         <div className='welcomeArea' style={{gridArea: 'welcomeArea'}}>
-          <Box >
-            <h1 className='title'>
-              Bem vindo, {githubUser}
-            </h1>
-
-            <OrkutNostalgicIconSet />
-          </Box>
-
+          <ProfileInfos githubUser={githubUser}/>
           <Communities githubUser={githubUser} />
         </div>
 

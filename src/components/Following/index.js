@@ -37,7 +37,7 @@ function Following() {
       </ul>
 
       <span>
-        <Link href='/communities'>Ver mais</Link>
+        <Link href='/following'>Ver mais</Link>
       </span>
     </ProfileRelationsBoxWrapper>
   )

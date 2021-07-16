@@ -50,7 +50,7 @@ function Menu({ githubUser }) {
         </Logo>
 
         <nav style={{ flex: 1 }}>
-          {[{ name: 'Inicio', slug: '/'}, {name: 'Seguidores', slug: '/seguidores'}, {name: 'Seguindo', slug: '/seguindo'}].map((menuItem) => (
+          {[{ name: 'Inicio', slug: '/'}, {name: 'Seguidores', slug: '/followers'}, {name: 'Seguindo', slug: '/following'}, {name: 'Comunidades', slug: '/Communities'}].map((menuItem) => (
             <Link key={`key__${menuItem.name.toLocaleLowerCase()}`} href={`${menuItem.slug.toLocaleLowerCase()}`}>
               {menuItem.name}
             </Link>
