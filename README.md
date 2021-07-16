@@ -1,4 +1,4 @@
-<div style="display: flex; flex-direction: row; justify-content: center;">
+<div align="center">
   <img alt="Moveit" width=100 src="./public/github-icon.svg">
   <h1>helloGit</h1>
 </div>
