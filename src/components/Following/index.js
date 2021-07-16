@@ -25,7 +25,7 @@ function Following() {
         {following.map((item) => {
           return (
             <li key={item.id}>
-              <a href={item.html_url}>
+              <a href={item.html_url} target='_blank'>
                 <img src={item.avatar_url} />
                 <span>{item.login}</span>
               </a>
