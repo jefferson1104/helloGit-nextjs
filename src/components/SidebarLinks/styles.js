@@ -10,8 +10,8 @@ export const ProfileSidebarMenuResponsive = styled.div`
     justify-content: flex-start;
     text-decoration: none;
     img {
-      width: 16px;
-      height: 16px;
+      width: 22px;
+      height: 22px;
       margin-right: 5px; 
     }
   }

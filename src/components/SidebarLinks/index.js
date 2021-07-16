@@ -1,36 +1,51 @@
 import { ProfileSidebarMenuResponsive } from './styles';
 
-const BASE_URL = 'http://alurakut.vercel.app/';
+import ProfileIcon from '../../../public/profile-icon.svg';
+import StarIcon from '../../../public/star-icon.svg';
+import CommitIcon from '../../../public/commit-icon.svg';
+import PullRequestIcon from '../../../public/pull-request-icon.svg';
+import ContributionIcon from '../../../public/heart-icon.svg';
+import IssuesIcon from '../../../public/issues-icon.svg';
+import RepositoriesIcon from '../../../public/repository-icon.svg';
+import logoutIcon from '../../../public/logout-icon.svg';
 
 function SidebarLinks() {
   return (
     <ProfileSidebarMenuResponsive>
       <nav>
         <a href="/">
-          <img src={`${BASE_URL}/icons/user.svg`} />
+          <img src={ProfileIcon} />
             Perfil
           </a>
         <a href="/">
-          <img src={`${BASE_URL}/icons/book.svg`} />
-            Recados
+          <img src={StarIcon} />
+            Estrelas
           </a>
         <a href="/">
-          <img src={`${BASE_URL}/icons/camera.svg`} />
-            Fotos
+          <img src={CommitIcon} />
+            Commits
           </a>
         <a href="/">
-          <img src={`${BASE_URL}/icons/sun.svg`} />
-            Depoimentos
-          </a>
+          <img src={PullRequestIcon} />
+            Pull Requests
+        </a>
+        <a href="/">
+          <img src={IssuesIcon} />
+            Issues
+        </a>
+        <a href="/">
+          <img src={ContributionIcon} />
+            Contribuições
+        </a>
       </nav>
       <hr />
       <nav>
         <a href="/">
-          <img src={`${BASE_URL}/icons/plus.svg`} />
-            GitHub Trends
+          <img src={RepositoriesIcon} />
+            Repositórios
           </a>
         <a href="/logout">
-          <img src={`${BASE_URL}//icons/logout.svg`} />
+          <img src={logoutIcon} />
             Sair
           </a>
       </nav>

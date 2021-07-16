@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-const BASE_URL = 'http://alurakut.vercel.app/';
+import search from '../../../public/search.svg'
 
 export const MenuWrapper = styled.header`
 width: 100%;
 background-color: #333333;
 .alurakutMenuProfileSidebar {
-  background: white;
+  background: #f4f4f4;
   position: fixed;
   z-index: 100;
   padding: 46px;
@@ -29,7 +29,7 @@ background-color: #333333;
   }
   .boxLink {
     font-size: 18px;
-    color: #ECF2FA;
+    color: #333333;
     -webkit-text-decoration: none;
     text-decoration: none;
     font-weight: 800;
@@ -38,7 +38,7 @@ background-color: #333333;
     margin-top: 12px;
     margin-bottom: 8px;
     border-color: transparent;
-    border-bottom-color: #ECF2FA;
+    border-bottom-color: #d3d3d3;
   }
 }
 .container {
@@ -92,7 +92,8 @@ background-color: #333333;
     background: #ECF2FA;
     padding: 10px 42px;
     border: 0;
-    background-image: url(${`${BASE_URL}/icons/search.svg`});
+    background-image: url(${search});
+    background-size: 15px;
     background-position: 15px center;
     background-repeat: no-repeat;
     border-radius: 1000px;
