@@ -8,9 +8,12 @@ const Box = styled.div`
   margin-bottom: 10px;
   .boxLink {
     font-size: 14px;
-    color: #2E7BB4;
+    color: #333333;
     text-decoration: none;
     font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .title {
     font-size: 32px;
@@ -33,7 +36,7 @@ const Box = styled.div`
     margin-top: 12px;
     margin-bottom: 8px;
     border-color: transparent;
-    border-bottom-color: #ECF2FA;
+    border-bottom-color: #d3d3d3;
   }
   input {
     width: 100%;

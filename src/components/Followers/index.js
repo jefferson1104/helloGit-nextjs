@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+
 import { ProfileRelationsBoxWrapper } from '../ProfileRelations';
 
 function Followers() {
@@ -33,6 +35,10 @@ function Followers() {
           )
         }).slice(0, 6)}
       </ul>
+
+      <span>
+        <Link href='/communities'>Ver mais</Link>
+      </span>
     </ProfileRelationsBoxWrapper>
   )
 }
