@@ -26,8 +26,8 @@ export default function Home() {
         </div>
 
         <div className='profileRelationsArea' style={{gridArea: 'profileRelationsArea'}}>
-          <Following />
-          <Followers />
+          <Following githubUser={githubUser}/>
+          <Followers githubUser={githubUser}/>
         </div>
       </MainGrid>
     </>

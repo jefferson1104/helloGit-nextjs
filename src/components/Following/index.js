@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import api from '../../services/api';
 
 import { ProfileRelationsBoxWrapper } from '../ProfileRelations';
 
-function Following() {
+function Following({ githubUser }) {
   const [following, setFollowing] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    // REST: Buscando dados da api do github
-    fetch('https://api.github.com/users/jefferson1104/following')
-    .then(function (serverResponse) {
-      return serverResponse.json();
-    })
-    .then(function (fullResponse) {
-      setFollowing(fullResponse);
-    })
+    async function loadData() {
+      const [responseFollowing, responseInfo] = await Promise.all([
+        api.get(`users/${githubUser}/following`),
+        api.get(`users/${githubUser}`),
+      ]);
+      setFollowing(responseFollowing.data);
+      setUserInfo(responseInfo.data);
+    }
+    loadData();
   }, []);
 
   return (
@@ -37,7 +40,7 @@ function Following() {
       </ul>
 
       <span>
-        <Link href='/following'>Ver mais</Link>
+        <Link href='/following'>Ver todos</Link>
       </span>
     </ProfileRelationsBoxWrapper>
   )

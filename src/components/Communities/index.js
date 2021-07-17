@@ -130,7 +130,7 @@ function Communities(props) {
         </ul>
         
         <span>
-          <Link href='/communities'>Ver mais</Link>
+          <Link href='/communities'>Ver todos</Link>
         </span>
       </ProfileRelationsBoxWrapper>
     </Box>

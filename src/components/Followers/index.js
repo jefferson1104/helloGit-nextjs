@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import api from '../../services/api';
 
 import { ProfileRelationsBoxWrapper } from '../ProfileRelations';
 
-function Followers() {
+function Followers({ githubUser }) {
   const [followers, setFollowers] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    // REST: Buscando dados da api do github
-    fetch('https://api.github.com/users/jefferson1104/followers')
-    .then(function (serverResponse) {
-      return serverResponse.json();
-    })
-    .then(function (fullResponse) {
-      setFollowers(fullResponse);
-    })
+    async function loadData() {
+      const [responseFollowers, responseInfo] = await Promise.all([
+        api.get(`users/${githubUser}/followers`),
+        api.get(`users/${githubUser}`),
+      ]);
+      setFollowers(responseFollowers.data);
+      setUserInfo(responseInfo.data);
+    }
+    loadData();
   }, []);
 
   return (
     <ProfileRelationsBoxWrapper >
       <h2 className='smallTitle'>
-        Seguidores ({followers.length})
+        Seguidores ({userInfo.followers})
       </h2>
 
       <ul>
@@ -37,7 +40,7 @@ function Followers() {
       </ul>
 
       <span>
-        <Link href='/followers'>Ver mais</Link>
+        <Link href='/followers'>Ver todos</Link>
       </span>
     </ProfileRelationsBoxWrapper>
   )

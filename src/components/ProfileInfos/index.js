@@ -10,13 +10,13 @@ import followingIcon from '../../../public/following-icon.svg';
 import followersIcon from '../../../public/followers-icon.svg';
 
 
-function ProfileInfos(props) {
+function ProfileInfos({ githubUser }) {
   const [profileData, setProfileData] = useState([])
   const [starred, setStarred] = useState([]);
 
   useEffect(() => {
     // REST: Buscando dados geral do usuario
-    fetch('https://api.github.com/users/jefferson1104')
+    fetch(`https://api.github.com/users/${githubUser}`)
     .then(function (serverResponse) {
       return serverResponse.json();
     })
@@ -25,16 +25,13 @@ function ProfileInfos(props) {
     })
 
     // REST: Buscando dados geral do usuario
-    fetch('https://api.github.com/users/jefferson1104/starred')
+    fetch(`https://api.github.com/users/${githubUser}/starred`)
     .then(function (serverResponse) {
       return serverResponse.json();
     })
     .then(function (fullResponse) {
       setStarred(fullResponse);
     })
-
-    console.log('STARRED', starred)
-    console.log('DADOS API', profileData)
   }, []);
 
   return (

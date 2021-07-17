@@ -1,3 +1,5 @@
+import React from 'react';
+import Link from 'next/link';
 import { ProfileSidebarMenuResponsive } from './styles';
 
 import ProfileIcon from '../../../public/profile-icon.svg';
@@ -13,41 +15,63 @@ function SidebarLinks() {
   return (
     <ProfileSidebarMenuResponsive>
       <nav>
-        <a href="/">
-          <img src={ProfileIcon} />
+        <Link href='/'>
+          <a>
+            <img src={ProfileIcon} />
             Perfil
           </a>
-        <a href="/">
-          <img src={StarIcon} />
+        </Link>
+
+        <Link href="/asd">
+          <a>
+            <img src={StarIcon} />
             Estrelas
           </a>
-        <a href="/">
-          <img src={CommitIcon} />
+        </Link>
+
+        <Link href="/aaa">
+          <a>
+            <img src={CommitIcon} />
             Commits
           </a>
-        <a href="/">
-          <img src={PullRequestIcon} />
+        </Link>
+
+        <Link href="/aaa">
+          <a>
+            <img src={PullRequestIcon} />
             Pull Requests
-        </a>
-        <a href="/">
-          <img src={IssuesIcon} />
+          </a>
+        </Link>
+
+        <Link href="/aa">
+          <a>
+            <img src={IssuesIcon} />
             Issues
-        </a>
-        <a href="/">
-          <img src={ContributionIcon} />
+          </a>
+        </Link>
+
+        <Link href="/ss">
+          <a>
+            <img src={ContributionIcon} />
             Contribuições
-        </a>
+          </a>
+        </Link>
       </nav>
       <hr />
       <nav>
-        <a href="/">
-          <img src={RepositoriesIcon} />
+        <Link href="/dd">
+          <a>
+            <img src={RepositoriesIcon} />
             Repositórios
           </a>
-        <a href="/logout">
-          <img src={logoutIcon} />
+        </Link>
+        <Link href="/logout">
+          <a>
+            <img src={logoutIcon} />
             Sair
           </a>
+        </Link>
+        
       </nav>
     </ProfileSidebarMenuResponsive>
   )
