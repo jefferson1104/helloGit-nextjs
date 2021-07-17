@@ -6,7 +6,7 @@ import { FollowersPage, FollowersContent } from './styles';
 import api from '../../services/api';
 
 function Followers() {
-  const githubUser = 'peas';
+  const githubUser = 'omariosouto';
   const [followers, setFollowers] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,14 +16,15 @@ function Followers() {
       const response = await api.get(`users/${githubUser}/followers?per_page=12&page=${currentPage}&order=DESC`);
 
       const newFollowers = response.data;
+
       let oldFollowers = followers;
       oldFollowers.push(...newFollowers);
 
       setFollowers(oldFollowers);
     }
+    
     loadData();
   }, [currentPage]);
-
 
   useEffect(() => {
     async function loadData() {

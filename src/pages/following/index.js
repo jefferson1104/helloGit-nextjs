@@ -6,34 +6,48 @@ import { FollowingPage, FollowingContent } from './styles';
 import api from '../../services/api';
 
 function Following() {
-  const githubUser = 'jefferson1104';
+  const githubUser = 'omariosouto';
   const [following, setFollowing] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    // Modelo utilizando axios e async await
     async function loadData() {
-      const [responseFollowing, responseInfo] = await Promise.all([
-        api.get(`users/${githubUser}/following`),
-        api.get(`users/${githubUser}`),
-      ]);
-      setFollowing(responseFollowing.data);
-      setUserInfo(responseInfo.data);
+      const response = await api.get(`users/${githubUser}/following?per_page=12&page=${currentPage}&order=DESC`);
+
+      const newFollowing = response.data;
+
+      let oldFollowing = following;
+      oldFollowing.push(...newFollowing);
+      console.log('FOLLOWING',oldFollowing)
+
+      setFollowing(oldFollowing);
+    }
+
+    loadData();
+  }, [currentPage]);
+
+  useEffect(() => {
+    async function loadData() {
+      const response = await api.get(`users/${githubUser}`);
+
+      const userIformation = response.data;
+
+      setUserInfo(userIformation);
     }
     loadData();
+  }, []);
 
+  useEffect(() => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        console.log('Elemento está visivel!');
+        setCurrentPage((currentPageFollowing) => currentPageFollowing + 1);
+      }
+    });
 
-    // Modelo utilizando o fetch e .then
-    /*
-    fetch('https://api.github.com/users/jefferson1104/followers')
-    .then(function (serverResponse) {
-      console.log(serverResponse)
-      return serverResponse.json();
-    })
-    .then(function (fullResponse) {
-      setFollowers(fullResponse);
-    })
-    */
+    intersectionObserver.observe(document.querySelector('#checkpoint'));
+    return () => intersectionObserver.disconnect();
   }, []);
 
   return (
@@ -51,18 +65,21 @@ function Following() {
 
         <div className='welcomeArea' style={{gridArea: 'welcomeArea'}}>
           <FollowingContent >
-            <ul>
-              {following.map((item) => {
-                return (
-                  <li key={item.id}>
-                    <a href={item.html_url} target='_blank'>
-                      <img src={item.avatar_url} />
-                      <span>{item.login}</span>
-                    </a>
-                  </li>
-                )
-              }).slice(0, 12)}
-            </ul>
+            <section>
+              <ul>
+                {following.map((item) => {
+                  return (
+                    <li key={item.id}>
+                      <a href={item.html_url} target='_blank'>
+                        <img src={item.avatar_url} />
+                        <span>{item.login}</span>
+                      </a>
+                    </li>
+                  )
+                })}
+                <li id='checkpoint' />
+              </ul>
+            </section>
           </FollowingContent>
         </div>
       </FollowingPage>

@@ -25,12 +25,17 @@ export const FollowingPage = styled.main`
 `;
 
 export const FollowingContent =  styled(Box)`
-  background: #f4f4f4;
-  
+  section {
+    background: #f4f4f4;
+    height: 600px;
+    overflow-y: scroll;
+    padding: 20px
+  }
+
   ul {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr;
     list-style: none;
   }
 
@@ -81,12 +86,28 @@ export const FollowingContent =  styled(Box)`
   @media (max-width: 860px) {
     ul {
       grid-gap: 5px;
-      grid-template-columns: 1fr 1fr 1fr; 
+      grid-template-columns: 1fr 1fr; 
     }
 
     ul li a { 
-      height: 90px;
-      width: 100px;
+      height: 180px;
+      width: 180px;
     }
+  }
+
+  @media (max-width: 485px) {
+    ul {
+      grid-gap: 5px;
+      grid-template-columns: 1fr 1fr; 
+    }
+
+    ul li a { 
+      height: 120px;
+      width: 120px;
+    }
+  }
+
+  #checkpoint {
+    width: 100%;
   }
 `;

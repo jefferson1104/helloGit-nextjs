@@ -110,7 +110,5 @@ export const FollowersContent =  styled(Box)`
 
   #checkpoint {
     width: 100%;
-    height: 5px;
-    background-color: red;
   }
 `;
