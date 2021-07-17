@@ -14,7 +14,7 @@ function ProfileSidebar({ githubUser }) {
       </p>
       <hr />
 
-      <SidebarLinks />
+      <SidebarLinks githubUser={githubUser} />
     </Box>
   )
 }
