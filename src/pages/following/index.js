@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../../components/Menu';
 import Box from '../../components/Box';
-import { FollowingPage, FollowingContent } from './styles';
+import { FollowingPage, FollowingContent } from '../../styles/FollowingStyles';
 
 import api from '../../services/api';
 
-function Following() {
+export default function PageFollowing() {
   const githubUser = 'omariosouto';
   const [following, setFollowing] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
@@ -89,5 +89,3 @@ function Following() {
     </>
   )
 }
-
-export default Following;

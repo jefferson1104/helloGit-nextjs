@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../../components/Menu';
 import Box from '../../components/Box';
-import { FollowersPage, FollowersContent } from './styles';
+import { FollowersPage, FollowersContent } from '../../styles/FollowersStyles';
 
 import api from '../../services/api';
 
-function Followers() {
+export default function PageFollowers() {
   const githubUser = 'omariosouto';
   const [followers, setFollowers] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
@@ -89,5 +89,3 @@ function Followers() {
     </>
   )
 }
-
-export default Followers;

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../../components/Menu';
 import Box from '../../components/Box';
-import { CommunitiesPage, CommunitiesContent } from './styles';
 
-function Communities() {
+import { CommunitiesPage, CommunitiesContent } from '../../styles/CommunitiesStyles';
+
+export default function PageCommunities() {
   const [communities, setCommunities] = useState([]);
   const githubUser = 'jefferson1104'
 
@@ -68,5 +69,3 @@ function Communities() {
     </>
   )
 }
-
-export default Communities;

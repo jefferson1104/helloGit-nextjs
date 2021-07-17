@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Box from '../../components/Box';
+import Box from '../components/Box';
 
-export const FollowingPage = styled.main`
+export const CommunitiesPage = styled.main`
   width: 100%;
   grid-gap: 10px;
   margin-left: auto;
@@ -24,18 +24,13 @@ export const FollowingPage = styled.main`
   }
 `;
 
-export const FollowingContent =  styled(Box)`
-  section {
-    background: #f4f4f4;
-    height: 600px;
-    overflow-y: scroll;
-    padding: 20px
-  }
-
+export const CommunitiesContent =  styled(Box)`
+  background: #f4f4f4;
+  
   ul {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
     list-style: none;
   }
 
@@ -86,28 +81,12 @@ export const FollowingContent =  styled(Box)`
   @media (max-width: 860px) {
     ul {
       grid-gap: 5px;
-      grid-template-columns: 1fr 1fr; 
+      grid-template-columns: 1fr 1fr 1fr; 
     }
 
     ul li a { 
-      height: 180px;
-      width: 180px;
+      height: 90px;
+      width: 100px;
     }
-  }
-
-  @media (max-width: 485px) {
-    ul {
-      grid-gap: 5px;
-      grid-template-columns: 1fr 1fr; 
-    }
-
-    ul li a { 
-      height: 120px;
-      width: 120px;
-    }
-  }
-
-  #checkpoint {
-    width: 100%;
   }
 `;

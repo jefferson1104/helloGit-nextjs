@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Box from '../../components/Box';
+import Box from '../components/Box';
 
-export const FollowersPage = styled.main`
+export const FollowingPage = styled.main`
   width: 100%;
   grid-gap: 10px;
   margin-left: auto;
@@ -24,8 +24,7 @@ export const FollowersPage = styled.main`
   }
 `;
 
-export const FollowersContent =  styled(Box)`
-  
+export const FollowingContent =  styled(Box)`
   section {
     background: #f4f4f4;
     height: 600px;

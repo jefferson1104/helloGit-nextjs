@@ -265,9 +265,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "16.3.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.3.2.tgz#655432817f83b51ac869c2d51dd8305fb8342e16"
-  integrity sha512-jJs9ErFLP403I+hMLGnqDRWT0RYKSvArxuBVh2veudHV7ifEC1WAmjJADacZ7mRbA2nWgHtn8xyECMAot0SkAw==
+  version "16.3.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.3.3.tgz#0c30adff37bbbc7a50eb9b58fae2a504d0d88038"
+  integrity sha512-8h7k1YgQKxKXWckzFCMfsIwn0Y61UK6tlD6y2lOb3hTOIMlK3t9/QwHOhc81TwU+RMf0As5fj7NPjroERCnejQ==
 
 "@types/responselike@*":
   version "1.0.0"
@@ -899,9 +899,9 @@ constants-browserify@1.0.0, constants-browserify@^1.0.0:
   integrity sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=
 
 contentful-management@^7.9.0:
-  version "7.29.0"
-  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-7.29.0.tgz#88498e2289da4da5412bdf17d96ba10f73524f47"
-  integrity sha512-Wdyh+uaocvR2cim3NGEA43gX5Nw/rGTijE56zgjK2UFy0lg5Vm6p3wYetVTPO5cyTvnEWeoOIk9zJHUPaJtfCg==
+  version "7.30.0"
+  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-7.30.0.tgz#2df5fbd444b86d495150c708eaa031e88513b721"
+  integrity sha512-2aAIqLrxxCJt2bWg1LN+wxjYaevAHTsfZGkIPA5QRKK11WhpffrUMkTthbED6UWaY58BAM0TYXT3Z0s7nFu5zg==
   dependencies:
     "@types/json-patch" "0.0.30"
     axios "^0.21.0"
@@ -1148,17 +1148,17 @@ datocms-client@^3.4.11:
     wpapi "^1.2.1"
 
 datocms-contentful-to-structured-text@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/datocms-contentful-to-structured-text/-/datocms-contentful-to-structured-text-1.1.3.tgz#aadb3b172df18810f613a25802f0709084f0a8c6"
-  integrity sha512-QR0NRgf9QMZyK/KvOq04hEA1heWlOAHoZ+Zaq9ddPvx+7Kl+DVeI4NLhW23xOVBmqyuN0HAjd7B6mdbHIRHHlA==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/datocms-contentful-to-structured-text/-/datocms-contentful-to-structured-text-1.2.0.tgz#8e454e44859b9d1a2c376ff0a7d3d6657bbacec2"
+  integrity sha512-MFkZ49npUQgugjdKaF5vVuB84ign01i+wHkO5xrAjfVcCEGC4xX9I3rapg7WJ/0wHKGkwrQDIugD1qZ8mtIEag==
   dependencies:
     "@contentful/rich-text-types" "^14.1.2"
-    datocms-structured-text-utils "^1.1.3"
+    datocms-structured-text-utils "^1.2.0"
 
-datocms-structured-text-utils@^1.0.15, datocms-structured-text-utils@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/datocms-structured-text-utils/-/datocms-structured-text-utils-1.1.3.tgz#6d7ec558cd167d36135b9fd0422f6190aff869ee"
-  integrity sha512-65BfDlyBYHhpnVsN8nGEjZVezZe2JI9+fmlJ+Tj3GhK3f2tdEA3BfG5emNcYrE6itVFIU8KSJrKWiDM1ys4KsA==
+datocms-structured-text-utils@^1.0.15, datocms-structured-text-utils@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/datocms-structured-text-utils/-/datocms-structured-text-utils-1.2.0.tgz#ccbeb06c97f9d0f282750093fc1be0f2e2b0269c"
+  integrity sha512-8qfpSWU/nVrMr8C0aT5n16WN0/KQbtYD2GJXd9WDf01bfr+WzJCi5szZF1dBLhD2zhs41A4gtO3aM4J1CQe4wA==
   dependencies:
     array-flatten "^3.0.0"
 
@@ -1315,9 +1315,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.723:
-  version "1.3.776"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.776.tgz#33f6e2423b61f1bdaa8d2a103aae78a09764a75f"
-  integrity sha512-V0w7eFSBoFPpdw4xexjVPZ770UDZIevSwkkj4W97XbE3IsCsTRFpa7/yXGZ88EOQAUEA09JMMsWK0xsw0kRAYw==
+  version "1.3.779"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.779.tgz#de55492a756deec63424f89fbe62aec9776f0e6d"
+  integrity sha512-nreave0y/1Qhmo8XtO6C/LpawNyC6U26+q7d814/e+tIqUK073pM+4xW7WUXyqCRa5K4wdxHmNMBAi8ap9nEew==
 
 elliptic@^6.5.3:
   version "6.5.4"
