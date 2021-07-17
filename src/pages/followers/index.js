@@ -6,34 +6,46 @@ import { FollowersPage, FollowersContent } from './styles';
 import api from '../../services/api';
 
 function Followers() {
-  const githubUser = 'jefferson1104';
+  const githubUser = 'peas';
   const [followers, setFollowers] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    // Modelo utilizando axios e async await
     async function loadData() {
-      const [responseFollowers, responseInfo] = await Promise.all([
-        api.get(`users/${githubUser}/followers`),
-        api.get(`users/${githubUser}`),
-      ]);
-      setFollowers(responseFollowers.data);
-      setUserInfo(responseInfo.data);
+      const response = await api.get(`users/${githubUser}/followers?per_page=12&page=${currentPage}&order=DESC`);
+
+      const newFollowers = response.data;
+      let oldFollowers = followers;
+      oldFollowers.push(...newFollowers);
+
+      setFollowers(oldFollowers);
     }
     loadData();
+  }, [currentPage]);
 
 
-    // Modelo utilizando o fetch e .then
-    /*
-    fetch('https://api.github.com/users/jefferson1104/followers')
-    .then(function (serverResponse) {
-      console.log(serverResponse)
-      return serverResponse.json();
-    })
-    .then(function (fullResponse) {
-      setFollowers(fullResponse);
-    })
-    */
+  useEffect(() => {
+    async function loadData() {
+      const response = await api.get(`users/${githubUser}`);
+
+      const userIformation = response.data;
+
+      setUserInfo(userIformation);
+    }
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        console.log('Elemento está visivel!');
+        setCurrentPage((currentPageInsideState) => currentPageInsideState + 1);
+      }
+    });
+
+    intersectionObserver.observe(document.querySelector('#checkpoint'));
+    return () => intersectionObserver.disconnect();
   }, []);
 
   return (
@@ -51,18 +63,21 @@ function Followers() {
 
       <div className='welcomeArea' style={{gridArea: 'welcomeArea'}}>
         <FollowersContent >
-          <ul>
-            {followers.map((item) => {
-              return (
-                <li key={item.id}>
-                  <a href={item.html_url} target='_blank'>
-                    <img src={item.avatar_url} />
-                    <span>{item.login}</span>
-                  </a>
-                </li>
-              )
-            }).slice(0, 12)}
-          </ul>
+          <section>
+            <ul>
+              {followers.map((item) => {
+                return (
+                  <li key={item.id}>
+                    <a href={item.html_url} target='_blank'>
+                      <img src={item.avatar_url} />
+                      <span>{item.login}</span>
+                    </a>
+                  </li>
+                )
+              })}
+              <li id='checkpoint' />
+            </ul>
+          </section>
         </FollowersContent>
       </div>
       </FollowersPage>
