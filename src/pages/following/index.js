@@ -17,11 +17,14 @@ function Following() {
 
       const newFollowing = response.data;
 
-      let oldFollowing = following;
-      oldFollowing.push(...newFollowing);
-      console.log('FOLLOWING',oldFollowing)
-
-      setFollowing(oldFollowing);
+      if(following.length > 0 ) {
+        let oldFollowing = following;
+        oldFollowing.push(...newFollowing);
+  
+        setFollowing(oldFollowing);
+      } else {
+        setFollowing(newFollowing);
+      }
     }
 
     loadData();

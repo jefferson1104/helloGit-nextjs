@@ -17,10 +17,14 @@ function Followers() {
 
       const newFollowers = response.data;
 
-      let oldFollowers = followers;
-      oldFollowers.push(...newFollowers);
-
-      setFollowers(oldFollowers);
+      if(followers.length > 0 ) {
+        let oldFollowers = followers;
+        oldFollowers.push(...newFollowers);
+  
+        setFollowers(oldFollowers);
+      } else {
+        setFollowers(newFollowers);
+      }
     }
     
     loadData();
