@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useAuth } from '../hooks/useAuth';
-import api from '../services/api';
+import { useAuth } from '../../hooks/useAuth';
+import api from '../../services/api';
 
-import Menu from '../components/Menu';
-import Box from '../components/Box';
-import { FollowersPage, FollowersContent } from '../styles/FollowersStyles';
+import Menu from '../../components/Menu';
+import Box from '../../components/Box';
+import { FollowersPage, FollowersContent } from '../../styles/FollowersStyles';
 
 export default function PageFollowers() {
-  const router = useRouter();
-  const { user } = useAuth();
-
-  if (!user.login) {
-    router.push('/login')
-  }
-  
+  const { user } = useAuth(); 
   const githubUser = user.login;
 
   const [followers, setFollowers] = useState([]);

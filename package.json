@@ -8,6 +8,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "datocms-client": "^3.4.11",
+    "dotenv": "^10.0.0",
     "firebase": "^8.7.1",
     "next": "latest",
     "next-images": "^1.8.1",

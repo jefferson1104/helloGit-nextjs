@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -13,13 +12,7 @@ import Following from '../components/Following';
 import Communities from '../components/Communities';
 
 export default function Home() {
-  const router = useRouter();
   const { user } = useAuth();
-
-  if (!user) {
-    router.push('/login')
-  }
-
   const githubUser = user.login;
 
   return (
@@ -36,7 +29,7 @@ export default function Home() {
         </div>
 
         <div className='profileRelationsArea' style={{gridArea: 'profileRelationsArea'}}>
-          <Following githubUser={user.login}/>
+          <Following githubUser={githubUser}/>
           <Followers githubUser={githubUser}/>
         </div>
       </MainGrid>

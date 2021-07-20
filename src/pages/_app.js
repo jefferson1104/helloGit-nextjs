@@ -11,11 +11,13 @@ const theme = {
 
 export default function App({ Component, pageProps }) {
   return (
-    <AuthContextProvider>
+    <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <AuthContextProvider>
+          <Component {...pageProps} />
+        </AuthContextProvider>
       </ThemeProvider>
-    </AuthContextProvider>
+    </>
   )
 }

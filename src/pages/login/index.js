@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
-import githubIcon from '../../public/github-icon.svg'
-import githubIcon2 from '../../public/profile-icon.svg'
+import githubIcon from '../../../public/github-icon.svg'
+import githubIcon2 from '../../../public/profile-icon.svg'
 
 function PageLogin() {
   const router = useRouter();

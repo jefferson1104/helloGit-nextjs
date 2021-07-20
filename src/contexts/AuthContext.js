@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export function AuthContextProvider(props) {
   const [user, setUser] = useState();
 
+  /*
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
 
@@ -13,7 +14,7 @@ export function AuthContextProvider(props) {
         const { id, login, avatar_url } = user;
 
         if (!login || !avatar_url) {
-          throw new Error('Missing information from GitHub.');
+          throw new Error('Missing information from GitHub account.');
         }
 
         setUser({
@@ -28,6 +29,7 @@ export function AuthContextProvider(props) {
       unsubscribe();
     }
   }, [])
+  */
 
   async function signInWithGithub() {
     const provider = new firebase.auth.GithubAuthProvider();
