@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import Menu from '../../components/Menu';
-import Box from '../../components/Box';
+import { useRouter } from 'next/router';
+import { useAuth } from '../hooks/useAuth';
 
-import { CommunitiesPage, CommunitiesContent } from '../../styles/CommunitiesStyles';
+import Menu from '../components/Menu';
+import Box from '../components/Box';
+
+import { CommunitiesPage, CommunitiesContent } from '../styles/CommunitiesStyles';
 
 export default function PageCommunities() {
+  const router = useRouter();
+  const { user } = useAuth();
+  
+  if (!user.login) {
+    router.push('/login')
+  }
+
   const [communities, setCommunities] = useState([]);
-  const githubUser = 'jefferson1104'
+  
+  const githubUser = user.login;
 
   useEffect(() => {
     // GraphQL: Buscando dados cadastrados no datoCMS

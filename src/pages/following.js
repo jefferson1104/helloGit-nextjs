@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import Menu from '../../components/Menu';
-import Box from '../../components/Box';
-import { FollowingPage, FollowingContent } from '../../styles/FollowingStyles';
+import { useRouter } from 'next/router';
+import { useAuth } from '../hooks/useAuth';
 
-import api from '../../services/api';
+import api from '../services/api';
+
+import Menu from '../components/Menu';
+import Box from '../components/Box';
+import { FollowingPage, FollowingContent } from '../styles/FollowingStyles';
 
 export default function PageFollowing() {
-  const githubUser = 'omariosouto';
+  const router = useRouter();
+  const { user } = useAuth();
+
+  if (!user.login) {
+    router.push('/login')
+  }
+  
+  const githubUser = user.login;
+  
+
   const [following, setFollowing] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
