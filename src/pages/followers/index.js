@@ -7,7 +7,7 @@ import Box from '../../components/Box';
 import { FollowersPage, FollowersContent } from '../../styles/FollowersStyles';
 
 export default function PageFollowers() {
-  const { user } = useAuth(); 
+  const { user } = useAuth();
   const githubUser = user.login;
 
   const [followers, setFollowers] = useState([]);

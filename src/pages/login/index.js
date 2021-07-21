@@ -14,7 +14,7 @@ function PageLogin() {
       await signInWithGithub();
     }
 
-    router.push('/')
+   router.push('/')
   }
 
   return (

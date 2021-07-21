@@ -9,7 +9,7 @@ import { CommunitiesPage, CommunitiesContent } from '../../styles/CommunitiesSty
 export default function PageCommunities() {
   const [communities, setCommunities] = useState([]);
   const { user } = useAuth();
-  
+
   const githubUser = user.login;
 
   useEffect(() => {
@@ -38,7 +38,6 @@ export default function PageCommunities() {
       setCommunities(communities)
     })
   }, []);
-
 
   return (
     <>

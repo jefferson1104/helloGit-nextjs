@@ -1,15 +1,14 @@
 import React, { createContext, useState, useEffect} from "react";
 import { auth, firebase } from "../services/firebase";
+import nookies from 'nookies';
 
 export const AuthContext = createContext();
 
 export function AuthContextProvider(props) {
   const [user, setUser] = useState();
 
-  /*
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
-
       if (user) {
         const { id, login, avatar_url } = user;
 
@@ -24,18 +23,22 @@ export function AuthContextProvider(props) {
         });
       }
     });
-
     return () => {
       unsubscribe();
     }
-  }, [])
-  */
+  }, []);
+
+  useEffect(() => {
+    const cookies = nookies.get().USER_DATA;
+
+    if(!user) {
+      setUser(cookies);
+    }
+  }, []);
 
   async function signInWithGithub() {
     const provider = new firebase.auth.GithubAuthProvider();
-
     const result = await auth.signInWithPopup(provider);
-    console.log('DADOS DA API', result.additionalUserInfo.profile)
 
     if (result.additionalUserInfo.profile) {
       const { id, login, avatar_url } = result.additionalUserInfo.profile
@@ -48,7 +51,18 @@ export function AuthContextProvider(props) {
         id: id,
         login: login,
         avatar: avatar_url
-      })
+      });
+
+      const userData = JSON.stringify({
+        id: id,
+        login: login,
+        avatar: avatar_url
+      });
+
+      nookies.set(null, 'USER_DATA', userData, {
+        path: '/',
+        maxAge: 86400 * 7
+      });
     }
   }
 

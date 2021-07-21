@@ -9,11 +9,8 @@ import { FollowingPage, FollowingContent } from '../../styles/FollowingStyles';
 
 export default function PageFollowing() {
   const { user } = useAuth();
-  console.log('OBJETO USER', user);
-  console.log('USER', user.login);
   const githubUser = user.login;
 
-  
   const [following, setFollowing] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
