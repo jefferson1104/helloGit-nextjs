@@ -1,21 +1,11 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { useAuth } from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 
 import githubIcon from '../../../public/github-icon.svg'
 import githubIcon2 from '../../../public/profile-icon.svg'
 
 function PageLogin() {
-  const router = useRouter();
-  const { user, signInWithGithub } = useAuth();
-
-  async function handleSignIn() {
-    if (!user) {
-      await signInWithGithub();
-    }
-
-   router.push('/')
-  }
+  const { signin } = useAuth();
 
   return (
     <main style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -34,7 +24,7 @@ function PageLogin() {
             <p>
               Acesse agora mesmo com seu usuário do <strong>GitHub</strong>!
             </p>
-            <button onClick={handleSignIn}>
+            <button onClick={() => signin()}>
               <img src={githubIcon2} />
               Login
             </button>

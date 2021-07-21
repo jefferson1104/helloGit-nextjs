@@ -1,74 +1,85 @@
 import React, { createContext, useState, useEffect} from "react";
-import { auth, firebase } from "../services/firebase";
-import nookies from 'nookies';
+import Router from 'next/router';
+import cookie from 'js-cookie';
+
+import firebase from '../services/firebase';
 
 export const AuthContext = createContext();
 
-export function AuthContextProvider(props) {
-  const [user, setUser] = useState();
+// funcao para formatar o objeto
+const formatUser = async (user) => ({
+  uid: user.id,
+  name: user.name,
+  login: user.login,
+  avatar: user.avatar_url,
+})
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        const { id, login, avatar_url } = user;
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-        if (!login || !avatar_url) {
-          throw new Error('Missing information from GitHub account.');
-        }
-
-        setUser({
-          id: id,
-          login: login,
-          avatar: avatar_url
-        });
-      }
-    });
-    return () => {
-      unsubscribe();
+  // funcao para adicionar o usuario formatado no estado
+  const handleUser = async (currentUser) => {
+    if (currentUser) {
+      const formatedUser = await formatUser(currentUser);
+      setUser(formatedUser);
+      setSession(true);
+      return formatedUser.login;
     }
-  }, []);
+    setUser(false);
+    setSession(false);
+    return false;
+  }
 
-  useEffect(() => {
-    const cookies = nookies.get().USER_DATA;
-
-    if(!user) {
-      setUser(cookies);
+  // funcao para salvar dados nos cookies
+  const setSession = (session) => {
+    if (session) {
+      cookie.set('user-auth', session, {
+        expires: 1,
+      });
+    } else {
+      cookie.remove('user-auth');
     }
-  }, []);
+  }
+ 
+  // funcao para fazer login
+  const signin = async () => {
+    try {
+      setLoading(true);
+      const response = await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
 
-  async function signInWithGithub() {
-    const provider = new firebase.auth.GithubAuthProvider();
-    const result = await auth.signInWithPopup(provider);
-
-    if (result.additionalUserInfo.profile) {
-      const { id, login, avatar_url } = result.additionalUserInfo.profile
-
-      if (!login || !avatar_url) {
-        throw new Error('Missing information from Github Account.');
-      }
-
-      setUser({
-        id: id,
-        login: login,
-        avatar: avatar_url
-      });
-
-      const userData = JSON.stringify({
-        id: id,
-        login: login,
-        avatar: avatar_url
-      });
-
-      nookies.set(null, 'USER_DATA', userData, {
-        path: '/',
-        maxAge: 86400 * 7
-      });
+      handleUser(response.additionalUserInfo.profile)
+      Router.push('/');
+    } finally {
+      setLoading(false);
     }
   }
 
-  return (
-    <AuthContext.Provider value={{ user, signInWithGithub }}>
-      {props.children}
-    </AuthContext.Provider>
-  )
+  // funcao para fazer logout
+  const signout = async () => {
+    try {
+      Router.push('/login');
+      await firebase.auth().signOut();
+      handleUser(false);
+      
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Recupera as informacoes do login caso a tela atualizar ou ser redirecionado
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
+    return () => unsubscribe();
+  }, [])
+
+  console.log('CONTEXT', user);
+
+  return <AuthContext.Provider value={{ user, loading, signin, signout}}>
+      { children }
+    </AuthContext.Provider>;
 }
+
+export const AuthConsumer = AuthContext.Consumer;
+
+export default AuthContext;

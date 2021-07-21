@@ -1,7 +1,8 @@
 import React from 'react';
 import GlobalStyle from '../styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
-import { AuthContextProvider } from '../contexts/AuthContext';
+
+import { AuthProvider } from '../contexts/AuthContext';
 
 const theme = {
   colors: {
@@ -11,13 +12,11 @@ const theme = {
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <AuthProvider>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <AuthContextProvider>
-          <Component {...pageProps} />
-        </AuthContextProvider>
+        <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </AuthProvider>
   )
 }

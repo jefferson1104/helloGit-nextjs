@@ -1,6 +1,7 @@
 import React from 'react';
+import Head from 'next/head';
 
-import { useAuth } from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 
 import Menu from '../components/Menu';
 import MainGrid from '../components/MainGrid';
@@ -13,10 +14,24 @@ import Communities from '../components/Communities';
 
 export default function Home() {
   const { user } = useAuth();
+  console.log('HOME', user);
+  
   const githubUser = user.login;
 
   return (
     <>
+      <Head>
+        <script 
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (!document.cookie || !document.cookie.includes('user-auth')) {
+                window.location.href = "/login"
+              }
+            `,
+          }}
+        />
+      </Head>
+
       <Menu githubUser={githubUser} />
       <MainGrid>
         <div className='profileArea' style={{gridArea: 'profileArea'}}>
