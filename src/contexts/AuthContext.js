@@ -9,8 +9,9 @@ export const AuthContext = createContext();
 // funcao para formatar o objeto
 const formatUser = async (user) => ({
   uid: user.id,
-  name: user.name,
   login: user.login,
+  name: user.name,
+  email: user.email,
   avatar: user.avatar_url,
 })
 
@@ -48,7 +49,7 @@ export function AuthProvider({ children }) {
       setLoading(true);
       const response = await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
 
-      handleUser(response.additionalUserInfo.profile)
+      handleUser(response.additionalUserInfo.profile);
       Router.push('/');
     } finally {
       setLoading(false);
@@ -71,13 +72,13 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
     return () => unsubscribe();
-  }, [])
+  }, []);
 
-  console.log('CONTEXT', user);
-
-  return <AuthContext.Provider value={{ user, loading, signin, signout}}>
+  return (
+    <AuthContext.Provider value={{ user, loading, signin, signout}}>
       { children }
-    </AuthContext.Provider>;
+    </AuthContext.Provider>
+  );
 }
 
 export const AuthConsumer = AuthContext.Consumer;
