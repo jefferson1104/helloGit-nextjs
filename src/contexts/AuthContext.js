@@ -24,11 +24,12 @@ export function AuthProvider({ children }) {
     if (currentUser) {
       const formatedUser = await formatUser(currentUser);
       setUser(formatedUser);
+      // setSession(formatedUser);
       setSession(true);
       return formatedUser.login;
     }
     setUser(false);
-    setSession(false);
+    setSession(null);
     return false;
   }
 
@@ -70,12 +71,15 @@ export function AuthProvider({ children }) {
 
   // Recupera as informacoes do login caso a tela atualizar ou ser redirecionado
   useEffect(() => {
+    // const cookies = cookie.get('user-auth');
+    // setUser(cookies);
+
     const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
     return () => unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, signin, signout}}>
+    <AuthContext.Provider value={{ user, loading, signin, signout }}>
       { children }
     </AuthContext.Provider>
   );
@@ -84,3 +88,9 @@ export function AuthProvider({ children }) {
 export const AuthConsumer = AuthContext.Consumer;
 
 export default AuthContext;
+
+export async function getStaticProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}

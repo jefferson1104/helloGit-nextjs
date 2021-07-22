@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 
 import useAuth from '../hooks/useAuth';
@@ -14,9 +14,10 @@ import Communities from '../components/Communities';
 
 export default function Home() {
   const { user } = useAuth();
-  console.log('HOME', user);
+  console.log('HOMEPAGE', user)
   
-  const githubUser = user.login;
+  // gostaria de usar o 'user.login' aqui nesse variavel abaixo
+  const githubUser = 'jefferson1104';
 
   return (
     <>
