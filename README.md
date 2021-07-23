@@ -43,6 +43,9 @@ $ git clone https://github.com/jefferson1104/helloGit-nextjs.git
 # Acesse a paste do projeto
 $ cd hellogit-nextjs
 
+# Configure as variaveis do .env.local no seu Github OAuth Apps
+https://github.com/settings/developers
+
 # Instale as dependencias do projeto utilizando o gerenciador de pacotes yarn
 $ yarn
 
