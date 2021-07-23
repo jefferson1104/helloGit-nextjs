@@ -16,7 +16,11 @@
 
 ##### :memo: Sobre o projeto
 
-O **helloGit** é uma rede social para usuários do github, a base do seu desenvolvimento foi feito na imersão reactjs da escola de programação Alura, este projeto teve diversas mudanças do modelo original criando na imersão, e você pode conferir [clicando aqui](https://hellogit-nextjs.vercel.app/).
+O **helloGit** é uma rede social para usuários do github, a base do seu desenvolvimento foi feito na imersão reactjs da escola de programação Alura, este projeto teve diversas mudanças do modelo original criando na imersão, e você pode conferir [clicando aqui](https://hellogit-nextjs.vercel.app/signin).
+
+<p align="center">
+  <img width=400 src="./assets/img/hellogit-screenshot-02.png">
+</p>
 
 ##### :rocket: Principais tecnologias
 
@@ -32,6 +36,8 @@ O **helloGit** é uma rede social para usuários do github, a base do seu desenv
   <li><a target="_blank" href="https://graphql.org/">GraphQL</a></li>
 
   <li><a target="_blank" href="https://www.datocms.com/">Dato CMS</a></li>
+
+  <li><a target="_blank" href="https://next-auth.js.org/">NextAuth</a></li>
 </ul>
 
 ##### :cyclone: Como executar este projeto localmente?
@@ -53,3 +59,13 @@ $ yarn
 $ yarn dev
 
 ```
+
+##### 🎨 Screenshots
+
+<p align="center">
+  <img width=500 src="./assets/img/hellogit-screenshot-01.png">
+  <img width=500 src="./assets/img/hellogit-screenshot-02.png">
+  <img width=500 src="./assets/img/hellogit-screenshot-03.png">
+  <img width=500 src="./assets/img/hellogit-screenshot-04.png">
+  <img width=500 src="./assets/img/hellogit-screenshot-05.png">
+</p>

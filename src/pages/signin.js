@@ -26,7 +26,7 @@ export default function SignIn({ providers }) {
             return (
               <button key={provider.name} onClick={() => signIn(provider.id)}>
                 <img src={githubIcon2} />
-                Sign in with {provider.name}
+                LOGIN
               </button>
             );
           })}
