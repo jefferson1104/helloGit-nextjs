@@ -16,10 +16,10 @@
 
 ##### :memo: Sobre o projeto
 
-O **helloGit** é uma rede social para usuários do github, a base do seu desenvolvimento foi feito na imersão reactjs da escola de programação Alura, este projeto teve diversas mudanças do modelo original criando na imersão, e você pode conferir [clicando aqui](https://hellogit-nextjs.vercel.app/signin).
+O **helloGit** é uma rede social para usuários do github, a base do seu desenvolvimento foi com javascript e o framework NextJS, utilizamos tambem diversas tecnologias na construção da aplicação, como por exemplo o gerenciador de providers para autenticação NextAuth, hooks e recursos como useEffect, useState, Server Side Rendering foram utilizados nesse projeto.
 
 <p align="center">
-  <img width=400 src="./assets/img/hellogit-screenshot-02.png">
+  <img width=600 src="./assets/img/hellogit-screenshot-02.png">
 </p>
 
 ##### :rocket: Principais tecnologias
