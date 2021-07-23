@@ -1,38 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-
-import useAuth from '../hooks/useAuth';
+import React from 'react';
+import { getSession } from "next-auth/client";
 
 import Menu from '../components/Menu';
 import MainGrid from '../components/MainGrid';
 import ProfileSidebar from '../components/ProfileSidebar';
 import ProfileInfos from '../components/ProfileInfos';
-
 import Followers from '../components/Followers';
 import Following from '../components/Following';
 import Communities from '../components/Communities';
 
-export default function Home() {
-  const { user } = useAuth();
-  console.log('HOMEPAGE', user)
-  
-  // gostaria de usar o 'user.login' aqui nesse variavel abaixo
-  const githubUser = 'jefferson1104';
+export default function Home({ session }) {
+  const githubUser = session.user.name;
 
   return (
     <>
-      <Head>
-        <script 
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (!document.cookie || !document.cookie.includes('user-auth')) {
-                window.location.href = "/login"
-              }
-            `,
-          }}
-        />
-      </Head>
-
       <Menu githubUser={githubUser} />
       <MainGrid>
         <div className='profileArea' style={{gridArea: 'profileArea'}}>
@@ -51,4 +32,23 @@ export default function Home() {
       </MainGrid>
     </>
   )
+}
+
+// Pegando os dados da session antes de renderizar a pagina.
+export const getServerSideProps = async ({req, res}) => {
+  const session = await getSession({ req });
+
+  if(!session) {
+    res.writeHead(302, {
+      Location: "/signin",
+    });
+    res.end()
+    return false;
+  }
+
+  return {
+    props: {
+      session
+    }
+  }
 }

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
+import { getSession } from "next-auth/client";
 
 import Menu from '../../components/Menu';
 import Box from '../../components/Box';
 
 import { CommunitiesPage, CommunitiesContent } from '../../styles/CommunitiesStyles';
 
-export default function PageCommunities() {
+export default function PageCommunities({ session }) {
+  const githubUser = session.user.name;
   const [communities, setCommunities] = useState([]);
-  const { user } = useAuth();
-
-  const githubUser = user.login;
-
+ 
   useEffect(() => {
     // GraphQL: Buscando dados cadastrados no datoCMS
     fetch('https://graphql.datocms.com/', {
@@ -71,4 +69,24 @@ export default function PageCommunities() {
       </CommunitiesPage>
     </>
   )
+}
+
+// Pegando os dados da session antes de renderizar a pagina.
+export const getServerSideProps = async (context) => {
+  const {req, res} = context;
+  const session = await getSession({ req })
+
+  if(!session) {
+    res.writeHead(302, {
+      Location: "/signin",
+    });
+    res.end()
+    return;
+  }
+
+  return {
+    props: {
+      session
+    }
+  }
 }

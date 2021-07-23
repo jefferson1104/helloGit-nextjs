@@ -2,7 +2,9 @@ import React from 'react';
 import GlobalStyle from '../styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
 
-import { AuthProvider } from '../contexts/AuthContext';
+// import { AuthProvider } from '../contexts/AuthContext';
+import { Provider } from 'next-auth/client'
+
 
 const theme = {
   colors: {
@@ -12,11 +14,11 @@ const theme = {
 
 export default function App({ Component, pageProps }) {
   return (
-    <AuthProvider>
+    <Provider session={pageProps.session}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
-    </AuthProvider>
+    </Provider>
   )
 }

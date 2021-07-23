@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
+import { getSession } from "next-auth/client";
+
+
 import api from '../../services/api';
 
 import Menu from '../../components/Menu';
 import Box from '../../components/Box';
+
 import { FollowersPage, FollowersContent } from '../../styles/FollowersStyles';
 
-export default function PageFollowers() {
-  const { user } = useAuth();
-  const githubUser = user.login;
+export default function PageFollowers({ session , data }) {
+  // const [followers, setFollowers] = useState([data]);
+  // const [currentPage, setCurrentPage] = useState(1);
 
-  const [followers, setFollowers] = useState([]);
-  const [userInfo, setUserInfo] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const githubUser = session.user.name;
+  const followers = data;
 
+  /*
   useEffect(() => {
     async function loadData() {
       const response = await api.get(`users/${githubUser}/followers?per_page=12&page=${currentPage}&order=DESC`);
@@ -32,18 +35,9 @@ export default function PageFollowers() {
 
     loadData();
   }, [currentPage]);
+  */
 
-  useEffect(() => {
-    async function loadData() {
-      const response = await api.get(`users/${githubUser}`);
-
-      const userIformation = response.data;
-
-      setUserInfo(userIformation);
-    }
-    loadData();
-  }, []);
-
+  /*
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
@@ -55,15 +49,16 @@ export default function PageFollowers() {
     intersectionObserver.observe(document.querySelector('#checkpoint'));
     return () => intersectionObserver.disconnect();
   }, []);
+  */
 
   return (
     <>
-      <Menu githubUser={userInfo.login} />
+      <Menu githubUser={githubUser} />
       <FollowersPage>
       <div className='profileArea' style={{gridArea: 'profileArea'}}>
         <Box>
           <h1 className='Title'>
-            Seguidores ({userInfo.followers})
+            Seguidores ({ followers.length })
             <hr />
           </h1>
         </Box>
@@ -91,4 +86,29 @@ export default function PageFollowers() {
       </FollowersPage>
     </>
   )
+}
+
+// Pegando os dados da session antes de renderizar a pagina.
+export const getServerSideProps = async (context) => {
+  const {req, res} = context;
+  const session = await getSession({ req })
+
+  if(!session) {
+    res.writeHead(302, {
+      Location: "/signin",
+    });
+    res.end()
+    return;
+  }
+
+  const response = await api.get(`users/${session.user.name}/followers`);
+  const data = await response.data;
+  // console.log('DADOS', data);
+
+  return {
+    props: {
+      session,
+      data
+    }
+  }
 }

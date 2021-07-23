@@ -1,12 +1,10 @@
 import React from 'react';
-import useAuth from '../../hooks/useAuth';
+import { providers, signIn, getSession } from 'next-auth/client';
 
-import githubIcon from '../../../public/github-icon.svg'
-import githubIcon2 from '../../../public/profile-icon.svg'
+import githubIcon from '../../public/github-icon.svg';
+import githubIcon2 from '../../public/profile-icon.svg';
 
-function PageLogin() {
-  const { signin } = useAuth();
-
+export default function SignIn({ providers }) {
   return (
     <main style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <div className="loginScreen">
@@ -24,10 +22,14 @@ function PageLogin() {
             <p>
               Acesse agora mesmo com seu usuário do <strong>GitHub</strong>!
             </p>
-            <button onClick={() => signin()}>
-              <img src={githubIcon2} />
-              Login
-            </button>
+            {Object.values(providers).map((provider) => {
+            return (
+              <button key={provider.name} onClick={() => signIn(provider.id)}>
+                <img src={githubIcon2} />
+                Sign in with {provider.name}
+              </button>
+            );
+          })}
           </div>
         </section>
 
@@ -41,4 +43,20 @@ function PageLogin() {
   )
 }
 
-export default PageLogin;
+SignIn.getInitialProps = async(context) => {
+  const {req, res} = context;
+  const session = await getSession({req});
+
+  if (session && res) {
+    res.writeHead(302, {
+      Location: "/",
+    });
+    res.end()
+    return;
+  }
+
+  return {
+    session: undefined,
+    providers: await providers(context),
+  };
+}

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
+import { getSession } from "next-auth/client";
 
 import api from '../../services/api';
 
 import Menu from '../../components/Menu';
 import Box from '../../components/Box';
+
 import { FollowingPage, FollowingContent } from '../../styles/FollowingStyles';
 
-export default function PageFollowing() {
-  const user = useAuth();
-  const githubUser = user.login;
+export default function PageFollowing({ session, data }) {
+  // const [following, setFollowing] = useState([]);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const githubUser = session.user.name;
+  const following = data;
 
-  const [following, setFollowing] = useState([]);
-  const [userInfo, setUserInfo] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-
+  /*
   useEffect(() => {
     async function loadData() {
       const response = await api.get(`users/${githubUser}/following?per_page=12&page=${currentPage}&order=DESC`);
@@ -33,18 +33,9 @@ export default function PageFollowing() {
 
     loadData();
   }, [currentPage]);
+  */
 
-  useEffect(() => {
-    async function loadData() {
-      const response = await api.get(`users/${githubUser}`);
-
-      const userIformation = response.data;
-
-      setUserInfo(userIformation);
-    }
-    loadData();
-  }, []);
-
+  /*
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
@@ -56,6 +47,7 @@ export default function PageFollowing() {
     intersectionObserver.observe(document.querySelector('#checkpoint'));
     return () => intersectionObserver.disconnect();
   }, []);
+  */
 
   return (
     <>
@@ -64,7 +56,7 @@ export default function PageFollowing() {
         <div className='profileArea' style={{gridArea: 'profileArea'}}>
           <Box>
             <h1 className='Title'>
-              Seguindo ({userInfo.following})
+              Seguindo ({following.length})
               <hr />
             </h1>
           </Box>
@@ -92,4 +84,28 @@ export default function PageFollowing() {
       </FollowingPage>
     </>
   )
+}
+
+// Pegando os dados da session antes de renderizar a pagina.
+export const getServerSideProps = async (context) => {
+  const {req, res} = context;
+  const session = await getSession({ req })
+
+  if(!session) {
+    res.writeHead(302, {
+      Location: "/signin",
+    });
+    res.end()
+    return;
+  }
+
+  const response = await api.get(`users/${session.user.name}/following`);
+  const data = await response.data;
+
+  return {
+    props: {
+      session,
+      data
+    }
+  }
 }
