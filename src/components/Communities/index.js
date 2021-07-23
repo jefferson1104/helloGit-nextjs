@@ -4,11 +4,13 @@ import Link from 'next/link';
 import Box from '../Box';
 import { ProfileRelationsBoxWrapper } from '../ProfileRelations';
 
-function Communities(props) {
+function Communities({ githubUser }) {
   const [communities, setCommunities] = useState([]);
   const [title, setTitle] = useState([]);
   const [image, setImage] = useState([]);
   const [link, setLink] = useState([]);
+
+  console.log('PROPS', githubUser)
 
   useEffect(() => {
     // GraphQL: Buscando dados cadastrados no datoCMS
